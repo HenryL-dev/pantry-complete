@@ -23,4 +23,6 @@ public class Ingredient extends AbstractEntity {
     public void setRecipeIngredient(RecipeIngredient recipeIngredient) {
         this.recipeIngredient = recipeIngredient;
     }
+
+
 }
