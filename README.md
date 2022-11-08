@@ -9,3 +9,4 @@ The Pantry Sanity Project: A comprehensive meal planner for indecisive people
 - Lorin Smith
 - James Niebruegge
 
+# pantry

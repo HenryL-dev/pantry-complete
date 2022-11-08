@@ -59,6 +59,7 @@
                                 <option value=0></option>
                                 <option th:each="unit : ${units}" th:text="${unit.name}" th:value="${unit.id}"></option>
                             </select>
+                            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#newUnitModal">New</button>
                         </div>
                     </div>
                     <div class="col-md-auto">
