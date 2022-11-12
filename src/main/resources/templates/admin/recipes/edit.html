@@ -37,6 +37,7 @@
                     </div>
                 </div>
                 <button class="btn btn-primary" type="submit" formaction="save-recipe">Save Recipe</button>
+            </form>
         </div>
 
         <a id="message"></a>
@@ -59,6 +60,7 @@
                                 <option value=0></option>
                                 <option th:each="unit : ${units}" th:text="${unit.name}" th:value="${unit.id}"></option>
                             </select>
+                            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#newUnitModal">New</button>
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-auto">
@@ -75,13 +77,14 @@
                         <button class="btn btn-primary" type="submit" formaction="add-ingredient">Add</button>
                     </div>
                 </div>
-            </form>
         </div>
 
         <div class="container py-3">
             <ul class="list-group">
                 <li class="list-group-item" th:each="recipeIngredient, rowStat : ${recipeIngredients}" th:style="${rowStat.odd} ? 'background: #f0f0f2;' : 'background: #ffffff;'">
                     <span th:text="${recipeIngredient.amount}"></span> <span th:text="${recipeIngredient.unit}"></span> <span th:text="${recipeIngredient.ingredient}"></span>
+                    <!-- Edit Unit Modal -->
+
 
                     <!-- Edit Ingredient Modal -->
                     <i class="bi bi-pencil-square text-primary d-line" role="button" data-bs-toggle="modal" th:data-bs-target="'#editIngredientModal-' + ${rowStat.index}"></i>
