@@ -1,7 +1,0 @@
-.card-animation {
-    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12);
-}
-
-.card-animation:hover {
-    transform: scale(1.05);
-}
