@@ -1,8 +1,5 @@
 package org.liftoff.thepantry.models.dto;
 
-
-
-
 public class RegisterFormDTO extends LoginFormDTO {
 
     private String verifyPassword;
