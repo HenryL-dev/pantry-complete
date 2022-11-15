@@ -9,12 +9,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebApplicationConfig implements WebMvcConfigurer {
 
     @Bean
-    public AuthenticationFilter authenticationFilter() {
+    public AuthenticationFilter AuthenticationFilter() {
         return new AuthenticationFilter();
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor( authenticationFilter() );
+        registry.addInterceptor( AuthenticationFilter() );
     }
 }

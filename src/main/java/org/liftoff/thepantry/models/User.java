@@ -1,9 +1,10 @@
 package org.liftoff.thepantry.models;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 @Entity
 public class User extends AbstractEntity {
@@ -13,8 +14,6 @@ public class User extends AbstractEntity {
 
     @NotNull
     private String pwHash;
-
-
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -32,8 +31,5 @@ public class User extends AbstractEntity {
     public boolean isMatchingPassword(String password) {
         return encoder.matches(password, pwHash);
     }
-
-
-
 
 }

@@ -1,9 +1,5 @@
 package org.liftoff.thepantry.controllers;
 
-import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import org.liftoff.thepantry.data.UserRepository;
 import org.liftoff.thepantry.models.User;
 import org.liftoff.thepantry.models.dto.LoginFormDTO;
@@ -16,11 +12,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.util.Optional;
+
 @Controller
 public class AuthenticationController {
 
     @Autowired
     UserRepository userRepository;
+
 
     private static final String userSessionKey = "user";
 
@@ -43,22 +45,22 @@ public class AuthenticationController {
         session.setAttribute(userSessionKey, user.getId());
     }
 
-    @GetMapping("userAuth/register")
+    @GetMapping("/register")
     public String displayRegistrationForm(Model model) {
         model.addAttribute(new RegisterFormDTO());
         model.addAttribute("title", "Register");
-        return "userAuth/register";
+        return "register";
     }
 
 
-    @PostMapping("userAuth/register")
+    @PostMapping("/register")
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request,
                                           Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Register");
-            return "userAuth/register";
+            return "register";
         }
 
         User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
@@ -66,7 +68,7 @@ public class AuthenticationController {
         if (existingUser != null) {
             errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
             model.addAttribute("title", "Register");
-            return "userAuth/register";
+            return "register";
         }
 
         String password = registerFormDTO.getPassword();
@@ -74,7 +76,7 @@ public class AuthenticationController {
         if (!password.equals(verifyPassword)) {
             errors.rejectValue("password", "passwords.mismatch", "Passwords do not match");
             model.addAttribute("title", "Register");
-            return "userAuth/register";
+            return "register";
         }
 
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
@@ -84,21 +86,21 @@ public class AuthenticationController {
         return "redirect:";
     }
 
-    @GetMapping("userAuth/login")
+    @GetMapping("/login")
     public String displayLoginForm(Model model) {
         model.addAttribute(new LoginFormDTO());
         model.addAttribute("title", "Log In");
-        return "userAuth/login";
+        return "login";
     }
 
-    @PostMapping("userAuth/login")
+    @PostMapping("/login")
     public String processLoginForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO,
                                    Errors errors, HttpServletRequest request,
                                    Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Log In");
-            return "userAuth/login";
+            return "login";
         }
 
         User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
@@ -106,7 +108,7 @@ public class AuthenticationController {
         if (theUser == null) {
             errors.rejectValue("username", "user.invalid", "The given username does not exist");
             model.addAttribute("title", "Log In");
-            return "userAuth/login";
+            return "login";
         }
 
         String password = loginFormDTO.getPassword();
@@ -125,6 +127,6 @@ public class AuthenticationController {
     @GetMapping("/logout")
     public String logout(HttpServletRequest request){
         request.getSession().invalidate();
-        return "redirect:/login";
+        return "redirect:/";
     }
 }

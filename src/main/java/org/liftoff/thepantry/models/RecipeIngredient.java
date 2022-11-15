@@ -11,6 +11,7 @@ public class RecipeIngredient {
 
     private String amount;
 
+
     @OneToOne
     @JoinColumn(name = "ingredient_id", referencedColumnName = "id")
     private Ingredient ingredient;
@@ -23,6 +24,8 @@ public class RecipeIngredient {
     @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     private Recipe recipe;
 
+
+
     public RecipeIngredient() {
     }
 
@@ -31,6 +34,7 @@ public class RecipeIngredient {
         this.recipe = recipe;
         this.ingredient = ingredient;
         this.unit = unit;
+
     }
 
     // getters and setters
@@ -74,5 +78,6 @@ public class RecipeIngredient {
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
+
 
 }
