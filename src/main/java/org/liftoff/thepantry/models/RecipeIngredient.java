@@ -2,7 +2,7 @@ package org.liftoff.thepantry.models;
 
 import javax.persistence.*;
 
-@Entity
+@UserEntity
 public class RecipeIngredient {
 
     @Id

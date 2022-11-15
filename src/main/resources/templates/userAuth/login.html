@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="container">
 
 <header>
     <div th:replace="fragments :: nav"></div>
-    <div th:replace="fragments :: banner"></div>
+
 </header>
 
 <form method="post">
@@ -26,7 +25,9 @@
     <input type="submit" class="btn btn-primary" value="Log In" />
 </form>
 
-<p>Don't have an account? <a href="userAuth/register">Register for one.</a></p>
+<p>Don't have an account? <a href="/userAuth/register">Register for one.</a></p>
+
+<footer th:replace="fragments :: footer"></footer>
 
 </body>
 </html>

@@ -1,12 +1,12 @@
 package org.liftoff.thepantry.data;
 
-import org.liftoff.thepantry.models.User;
+import org.liftoff.thepantry.models.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
-    User findByUsername(String username);
+    UserEntity findByUsername(String username);
 
 }

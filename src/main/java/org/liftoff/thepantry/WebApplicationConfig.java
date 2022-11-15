@@ -2,6 +2,7 @@ package org.liftoff.thepantry;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.web.authentication.AuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -9,12 +10,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebApplicationConfig implements WebMvcConfigurer {
 
     @Bean
-    public AuthenticationFilter authenticationFilter() {
+    public AuthenticationFilter AuthenticationFilter() {
         return new AuthenticationFilter();
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor( authenticationFilter() );
+        registry.addInterceptor( AuthenticationFilter() );
     }
 }

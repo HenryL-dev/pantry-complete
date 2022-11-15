@@ -1,11 +1,7 @@
 package org.liftoff.thepantry.controllers;
 
-import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import org.liftoff.thepantry.data.UserRepository;
-import org.liftoff.thepantry.models.User;
+import org.liftoff.thepantry.models.UserEntity;
 import org.liftoff.thepantry.models.dto.LoginFormDTO;
 import org.liftoff.thepantry.models.dto.RegisterFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.util.Optional;
+
 @Controller
 public class AuthenticationController {
 
@@ -24,13 +25,13 @@ public class AuthenticationController {
 
     private static final String userSessionKey = "user";
 
-    public User getUserFromSession(HttpSession session) {
+    public UserEntity getUserFromSession(HttpSession session) {
         Integer userId = (Integer) session.getAttribute(userSessionKey);
         if (userId == null) {
             return null;
         }
 
-        Optional<User> user = userRepository.findById(userId);
+        Optional<UserEntity> user = userRepository.findById(userId);
 
         if (user.isEmpty()) {
             return null;
@@ -39,7 +40,7 @@ public class AuthenticationController {
         return user.get();
     }
 
-    private static void setUserInSession(HttpSession session, User user) {
+    private static void setUserInSession(HttpSession session, UserEntity user) {
         session.setAttribute(userSessionKey, user.getId());
     }
 
@@ -61,7 +62,7 @@ public class AuthenticationController {
             return "userAuth/register";
         }
 
-        User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
+        UserEntity existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
 
         if (existingUser != null) {
             errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
@@ -77,7 +78,7 @@ public class AuthenticationController {
             return "userAuth/register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+        UserEntity newUser = new UserEntity(registerFormDTO.getUsername(), registerFormDTO.getPassword());
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
 
@@ -101,7 +102,7 @@ public class AuthenticationController {
             return "userAuth/login";
         }
 
-        User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
+        UserEntity theUser = userRepository.findByUsername(loginFormDTO.getUsername());
 
         if (theUser == null) {
             errors.rejectValue("username", "user.invalid", "The given username does not exist");
@@ -114,7 +115,7 @@ public class AuthenticationController {
         if (!theUser.isMatchingPassword(password)) {
             errors.rejectValue("password", "password.invalid", "Invalid password");
             model.addAttribute("title", "Log In");
-            return "login";
+            return "userAuth/login";
         }
 
         setUserInSession(request.getSession(), theUser);
