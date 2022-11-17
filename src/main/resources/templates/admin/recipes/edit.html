@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
-<head th:replace="fragments :: head"></head>
+<head th:replace="fragments :: head">
+
+</head>
 <body>
 
     <header>
@@ -11,7 +13,7 @@
 
         <h1>Edit Recipe</h1>
 
-        <div class="container">
+        <div class="container py-4">
             <form method="post" id="edit">
                 <input type="hidden" name="recipeId" th:value="${recipe.id}" />
                 <input type="hidden" class="form-control" th:field="${recipe.image}" />
@@ -36,7 +38,11 @@
                         <button th:hidden="${recipe.image == null}" class="btn btn-outline-danger w-25" type="button" data-bs-toggle="modal" data-bs-target="#deleteImageModal">Delete Image</button>
                     </div>
                 </div>
-                <button class="btn btn-primary" type="submit" formaction="save-recipe">Save Recipe</button>
+<!--                <div class="formLayout__SectionButtonsContainer">-->
+                <button class="formLayout__submit elementButton__big elementButton__contained" type="submit" formaction="save-recipe">Save Recipe</button>
+<!--                <input type="submit" class="formLayout__submit elementButton__big elementButton__contained" value="Submit Recipe">-->
+
+<!--                </div>-->
             </form>
         </div>
 

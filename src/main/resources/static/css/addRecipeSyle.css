@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+}
+
+.formLayout {
+    margin: 0 0 48px;
+    background: linear-gradient(to bottom, #CAE8B5 96px, #fff 96px, #fff);
+    padding-top: 24px;
+}
+
+.formLayout__submit {
+    display: flex;
+    align-items: center;
+}
+
+.elementButton__contained {
+    border-radius: 4px;
+    background: #41babd66;
+    border: 3px solid #1f585ac2;
+    color: #1f585acc;
+}
+
+.elementButton__big {
+    font: 700 18px/28px "Source Sans Pro",sans-serif;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    padding: 8px 32px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+

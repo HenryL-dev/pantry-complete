@@ -1,0 +1,11 @@
+.navbar {
+  overflow: hidden;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0;
+  width: 100%; /* Full width */
+  z-index: 100;
+}
+.banner {
+     margin-top:auto;
+}
+
