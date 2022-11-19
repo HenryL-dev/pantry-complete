@@ -29,7 +29,7 @@
 
 <body>
 
-<nav th:fragment="nav" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+<nav th:fragment="nav" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark ">
     <div class="container">
         <a class="navbar-brand" th:href="@{/}"><img src="/images/logo.png" class="img-fluid"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarNav,navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,7 +107,7 @@
     </div>
 </banner>
 </div>
-<footer th:fragment="footer" class="border-top bg-dark mt-3">
+<footer th:fragment="footer" class="fixed-bottom bg-dark mt-3">
     <div class="container body-content p-4">
         <div class="row">
             <div class="col-12 col-md-6 text-muted d-flex justify-content-center justify-content-md-start align-items-center">
@@ -126,6 +126,12 @@
     </div>
 
 </footer>
+
+<div th:fragment="scripts">
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</div>
 
 </body>
 </html>
