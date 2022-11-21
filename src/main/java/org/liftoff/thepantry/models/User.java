@@ -2,12 +2,16 @@ package org.liftoff.thepantry.models;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 
 @Entity
-public class User extends AbstractEntity {
+public class User{
+
+    @Id
+    @GeneratedValue
+    private int id;
 
     @NotNull
     private String username;
@@ -15,7 +19,14 @@ public class User extends AbstractEntity {
     @NotNull
     private String pwHash;
 
+
+    @OneToOne
+    @JoinColumn(name = "id")
+    private User user;
+
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+
 
     public User() {}
 
@@ -32,4 +43,11 @@ public class User extends AbstractEntity {
         return encoder.matches(password, pwHash);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

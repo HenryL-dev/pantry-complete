@@ -1,9 +1,6 @@
 package org.liftoff.thepantry.controllers;
 
-import org.liftoff.thepantry.data.IngredientRepository;
-import org.liftoff.thepantry.data.RecipeIngredientRepository;
-import org.liftoff.thepantry.data.RecipeRepository;
-import org.liftoff.thepantry.data.UnitRepository;
+import org.liftoff.thepantry.data.*;
 import org.liftoff.thepantry.models.Ingredient;
 import org.liftoff.thepantry.models.Recipe;
 import org.liftoff.thepantry.models.RecipeIngredient;
@@ -45,7 +42,12 @@ public class AdminRecipeController {
     @Autowired
     private UnitRepository unitRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     // display/add/delete/edit/save recipe
+
+
 
     @GetMapping("")
     public String index(Model model) {

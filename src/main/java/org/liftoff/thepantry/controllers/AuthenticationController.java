@@ -33,7 +33,7 @@ public class AuthenticationController {
             return null;
         }
 
-        Optional<User> user = userRepository.findById(userId);
+        Optional<User> user = userRepository.findById(String.valueOf(userId));
 
         if (user.isEmpty()) {
             return null;
@@ -88,6 +88,7 @@ public class AuthenticationController {
         User addUser = new User(newUser.getUsername(), newUser.getPassword());
         userRepository.save(addUser);
         setUserInSession(request.getSession(), addUser);
+
 
         return "redirect:/";
     }

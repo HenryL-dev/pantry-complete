@@ -23,7 +23,7 @@ public class AuthenticationFilter implements HandlerInterceptor {
     //private static final List<String> whitelist = Arrays.asList("/static","/recipe","recipeList", "/results", "/search", "/about", "/features", "/list/index", "/login", "/register", "/logout", "/css", "/static", "/images", "/fragments");
     //private static final List<String> main = Arrays.asList("/home", "/home/");
     private static final String home = "/";
-    private static final String restricted = "/home/admin";
+    private static final String restricted = "/admin";
 
     private static boolean isWhitelisted(String path) {
                 //for (String pathRoot : whitelist) {
@@ -56,7 +56,7 @@ public class AuthenticationFilter implements HandlerInterceptor {
             System.out.println(user);
             return true;
         }
-        response.sendRedirect("/home/login");
+        response.sendRedirect("/login");
         System.out.println("not signed in");
         return false;
     }
