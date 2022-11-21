@@ -46,7 +46,7 @@ public class AuthenticationController {
         session.setAttribute(userSessionKey, user.getId());
     }
 
-    @GetMapping("/register")
+    @GetMapping("register")
     public String displayRegistrationForm(Model model) {
         model.addAttribute(new RegisterFormDTO());
         model.addAttribute("title", "Register");
@@ -54,10 +54,9 @@ public class AuthenticationController {
     }
 
 
-    @PostMapping("/register")
-    public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO newUser,
-                                          Errors errors, HttpServletRequest request,
-                                          Model model, RedirectAttributes ra) {
+    @PostMapping("register")
+    public String processRegistrationForm(Model model, @ModelAttribute @Valid RegisterFormDTO newUser, Errors errors, RedirectAttributes ra,
+                                           HttpServletRequest request) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Register");
@@ -68,20 +67,21 @@ public class AuthenticationController {
 
         if (existingUser != null) {
 
+
+            errors.rejectValue("username", "username.alreadyexists", "Username in use, please choose another.");
+            model.addAttribute("title", "Register");
             ra.addFlashAttribute("class", "alert alert-danger");
             ra.addFlashAttribute("message", "Username '" + newUser.getUsername() + "' already exists!");
-            errors.rejectValue("username", "username.alreadyexists", "Please choose another username.");
-            model.addAttribute("title", "Register");
             return "register";
         }
-
+// 12345678
         String password = newUser.getPassword();
         String verifyPassword = newUser.getVerifyPassword();
         if (!password.equals(verifyPassword)) {
-            ra.addFlashAttribute("class", "alert alert-danger");
-            ra.addFlashAttribute("message", "Passwords do not match!");
             errors.rejectValue("password", "passwords.mismatch", "Please enter matching passwords");
             model.addAttribute("title", "Register");
+            ra.addFlashAttribute("class", "alert alert-danger");
+            ra.addFlashAttribute("message", "Passwords do not match!");
             return "register";
         }
 

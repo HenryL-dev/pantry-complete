@@ -34,7 +34,7 @@
                     <a class="nav-link px-3 text-uppercase" th:href="@{/}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link px-3 text-uppercase" th:href="@{/recipes}">Recipes</a>
+                    <a class="nav-link px-3 text-uppercase" th:href="@{/recipeList}">Recipes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link px-3 text-uppercase" th:href="@{/search}">Search</a>
@@ -52,9 +52,9 @@
                 Account
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownAccountButton">
-                <li><a class="dropdown-item" th:href="@{/register}">Sign-Up</a></li>
-                <li><a class="dropdown-item" th:href="@{/login}">Login</a></li>
-                <li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
+                <li><a class="dropdown-item" th:href="@{register}">Sign-Up</a></li>
+                <li><a class="dropdown-item" th:href="@{login}">Login</a></li>
+                <li><a class="dropdown-item" th:href="@{logout}">Log out</a></li>
 <!--                <li><a class="dropdown-item" >Login</a></li>-->
 <!--                <li><a class="dropdown-item" th:href="@{/admin/units/}">Units</a></li>-->
             </ul>
@@ -79,7 +79,7 @@
             <div class="text-white">
                 <h1 class="mb-3"><a class="text-white text-reset text-uppercase text-decoration-none" th:href="@{/}">The Pantry</a></h1>
                 <h4 class="mb-3">Find recipe inspiration based on the food in your pantry.</h4>
-                <form method="post" th:action="@{/recipes/results}">
+                <form method="post" th:action="@{/recipeList/results}">
                     <div class="w-50 mx-auto">
                         <div class="input-group">
                             <input class="form-control" name="searchTerm" placeholder="Let's raid the Pantry!" />
@@ -103,7 +103,7 @@
         </p>
         <ul class="nav col-md-6 justify-content-end">
             <li class="nav-item"><a class="nav-link px-2 text-muted" th:href="@{/}">Home</a>
-            <li class="nav-item"><a class="nav-link px-2 text-muted" th:href="@{/recipes}">Recipes</a></li>
+            <li class="nav-item"><a class="nav-link px-2 text-muted" th:href="@{/recipeList}">Recipes</a></li>
             <li class="nav-item"><a class="nav-link px-2 text-muted" th:href="@{/search}">Search</a></li>
             <li class="nav-item"><a class="nav-link px-2 text-muted" th:href="@{/about}">About</a></li>
             <li class="nav-item"><a class="nav-link px-2 text-muted" th:href="@{/features}">Features</a></li>

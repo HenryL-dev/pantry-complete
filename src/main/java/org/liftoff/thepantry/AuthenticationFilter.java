@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 public class AuthenticationFilter implements HandlerInterceptor {
 
@@ -22,24 +20,21 @@ public class AuthenticationFilter implements HandlerInterceptor {
     @Autowired
     AuthenticationController AuthenticationController;
 
-    private static final List<String> whitelist = Arrays.asList("/", "/api","/search", "/list", "/recipe", "/home", "/index", "/login", "/register", "/logout", "/css","/images");
-//    private static final String home = "/";
+    //private static final List<String> whitelist = Arrays.asList("/static","/recipe","recipeList", "/results", "/search", "/about", "/features", "/list/index", "/login", "/register", "/logout", "/css", "/static", "/images", "/fragments");
+    //private static final List<String> main = Arrays.asList("/home", "/home/");
+    private static final String home = "/";
+    private static final String restricted = "/home/admin";
+
     private static boolean isWhitelisted(String path) {
-//        String home = "/";
-        for (String pathRoot : whitelist) {
-//            if (path.startsWith(pathRoot) || path.equals(home)) {
-//                System.out.println("whitelisted");
-//            }
-            if (path.startsWith(pathRoot)) {
-
-                return true;
-
-
-            }
+                //for (String pathRoot : whitelist) {
+        if(path.startsWith(home) && !path.startsWith(restricted)) {
+            return true;
         }
+        return false;
+    }
 
-            return false;
-        }
+
+
 
 
     @Override
@@ -48,7 +43,7 @@ public class AuthenticationFilter implements HandlerInterceptor {
                              Object handler) throws IOException {
 
 
-        if (isWhitelisted(request.getRequestURI())) {
+        if (isWhitelisted(request.getRequestURI()) ) {
             System.out.println("whitelisted");
             return true;
 
@@ -61,7 +56,7 @@ public class AuthenticationFilter implements HandlerInterceptor {
             System.out.println(user);
             return true;
         }
-        response.sendRedirect("/login");
+        response.sendRedirect("/home/login");
         System.out.println("not signed in");
         return false;
     }

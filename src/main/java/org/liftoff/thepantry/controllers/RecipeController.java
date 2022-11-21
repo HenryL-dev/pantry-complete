@@ -47,33 +47,33 @@ public class RecipeController {
 
     // display/search recipes
 
-    @GetMapping("recipes")
+    @GetMapping("recipeList")
     public String displayRecipes(Model model) {
         model.addAttribute("banner", "recipes");
         model.addAttribute("title", "Browse Recipes");
         model.addAttribute("recipes", recipeRepository.findAll());
-        return "recipes";
+        return "recipeList";
     }
 
-    @PostMapping("recipes/results")
+    @PostMapping("recipeList/results")
     public String displayRecipesBySearch(Model model, @RequestParam String searchTerm, RedirectAttributes ra) {
         ArrayList<Recipe> recipes;
         if (searchTerm.toLowerCase().isEmpty() || searchTerm.isBlank() || searchTerm.equals("")) {
             ra.addFlashAttribute("class", "alert alert-danger");
             ra.addFlashAttribute("message", "Please enter a search term.");
-            return "redirect:/recipes";
+            return "redirect:/recipeList";
         } else {
             recipes = findByValue(searchTerm, recipeRepository.findAll());
             if (recipes.isEmpty()) {
                 ra.addFlashAttribute("class", "alert alert-danger");
                 ra.addFlashAttribute("message", "No results for '" + searchTerm + "'");
-                return "redirect:/recipes";
+                return "redirect:/recipeList";
             }
             model.addAttribute("title", "Recipes matching '" + searchTerm +"'");
         }
         model.addAttribute("banner", "recipes");
         model.addAttribute("recipes", recipes);
-        return "recipes";
+        return "recipeList";
     }
 
     // find recipes by search term
