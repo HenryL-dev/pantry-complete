@@ -11,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -54,36 +55,41 @@ public class AuthenticationController {
 
 
     @PostMapping("/register")
-    public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
+    public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO newUser, LoginFormDTO loginPage,
                                           Errors errors, HttpServletRequest request,
-                                          Model model) {
-
+                                          Model model, RedirectAttributes ra) {
+        User existingUser = userRepository.findByUsername(newUser.getUsername());
         if (errors.hasErrors()) {
             model.addAttribute("title", "Register");
             return "register";
         }
 
-        User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
+
 
         if (existingUser != null) {
-            errors.rejectValue("username", "username.alreadyexists", "A user with that username already exists");
+
+            ra.addFlashAttribute("class", "alert alert-danger");
+            ra.addFlashAttribute("message", "Username '" + newUser.getUsername() + "' already exists!");
+            errors.rejectValue("username", "username.alreadyexists", new Object[] {};
             model.addAttribute("title", "Register");
             return "register";
         }
 
-        String password = registerFormDTO.getPassword();
-        String verifyPassword = registerFormDTO.getVerifyPassword();
+        String password = newUser.getPassword();
+        String verifyPassword = newUser.getVerifyPassword();
         if (!password.equals(verifyPassword)) {
-            errors.rejectValue("password", "passwords.mismatch", "Passwords do not match");
+            ra.addFlashAttribute("class", "alert alert-danger");
+            ra.addFlashAttribute("message", "Passwords do not match!");
+            errors.rejectValue("password", "passwords.mismatch", "Please reenter mat");
             model.addAttribute("title", "Register");
             return "register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
-        userRepository.save(newUser);
-        setUserInSession(request.getSession(), newUser);
+        User addUser = new User(newUser.getUsername(), newUser.getPassword());
+        userRepository.save(addUser);
+        setUserInSession(request.getSession(), addUser);
 
-        return "redirect:";
+        return "redirect:/";
     }
 
     @GetMapping("/login")
