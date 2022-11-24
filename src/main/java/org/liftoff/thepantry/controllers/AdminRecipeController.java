@@ -1,10 +1,7 @@
 package org.liftoff.thepantry.controllers;
 
 import org.liftoff.thepantry.data.*;
-import org.liftoff.thepantry.models.Ingredient;
-import org.liftoff.thepantry.models.Recipe;
-import org.liftoff.thepantry.models.RecipeIngredient;
-import org.liftoff.thepantry.models.Unit;
+import org.liftoff.thepantry.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -16,6 +13,9 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -46,18 +46,38 @@ public class AdminRecipeController {
     private UserRepository userRepository;
 
     // display/add/delete/edit/save recipe
+    private static final String userSessionKey = "user";
 
+    public User getUserFromSession(HttpSession session) {
+        Integer userId = (Integer) session.getAttribute(userSessionKey);
+        if (userId == null) {
+            return null;
+        }
+
+        Optional<User> user = userRepository.findById(userId);
+
+        if (user.isEmpty()) {
+            return null;
+        }
+
+        return user.get();
+    }
+
+    private static void setUserInSession(HttpSession session, User user) {
+        session.setAttribute(userSessionKey, user.getId());
+    }
 
 
     @GetMapping("")
-    public String index(Model model) {
+    public String index(Model model, HttpServletRequest user ) {
         model.addAttribute("recipes", recipeRepository.findAll(Sort.by(Sort.Direction.ASC, "name")));
+        request.getSession().getId();
         model.addAttribute(new Recipe());
         return "admin/recipes/index";
     }
 
     @PostMapping("add-recipe")
-    public String addRecipe(Model model, @ModelAttribute @Valid Recipe newRecipe, Errors errors, RedirectAttributes ra) {
+    public String addRecipe(Model model, @ModelAttribute @Valid Recipe newRecipe, @ModelAttribute User newUser, @ModelAttribute HttpServletResponse , Errors errors, RedirectAttributes ra, @RequestParam int  userSessionKey) {
         // error checking
         if (errors.hasErrors()) {
             model.addAttribute("recipes", recipeRepository.findAll(Sort.by(Sort.Direction.ASC, "name")));
@@ -68,16 +88,23 @@ public class AdminRecipeController {
             ra.addFlashAttribute("message", "Recipe '" + newRecipe.getName() + "' already exists.");
             return "redirect:/admin/recipes/";
         }
-
-        // save recipe
         recipeRepository.save(newRecipe);
         int recipeId = newRecipe.getId();
+        return "redirect:/admin/recipes/edit/" + recipeId;
+
+        Optional<User> optUser = userRepository.findById(Integer.valueOf(String.valueOf(userSessionKey)));
+        if(optUser.isPresent()) {
+            User userSelected = optUser.get();
+            newRecipe.setUser(userSelected);
+
+//        recipeRepository.save(newUser);
+//        int UserId = newRecipe.getId();
         return "redirect:/admin/recipes/edit/" + recipeId;
     }
 
     @PostMapping("delete-recipe")
     public String deleteRecipe(@RequestParam int recipeId, RedirectAttributes ra) {
-        Optional optRecipe = recipeRepository.findById(recipeId);
+        Optional<Recipe> optRecipe = recipeRepository.findById(recipeId);
         Recipe recipe = (Recipe) optRecipe.get();
 
         // delete recipe ingredients
@@ -98,19 +125,21 @@ public class AdminRecipeController {
 
     @GetMapping("edit/{recipeId}")
     public String editRecipe(Model model, @PathVariable int recipeId) {
-        Optional optRecipe = recipeRepository.findById(recipeId);
+        Optional<Recipe> optRecipe = recipeRepository.findById(recipeId);
         Recipe recipe = (Recipe) optRecipe.get();
         model.addAttribute("recipe", recipe);
         model.addAttribute("units", unitRepository.findAll(Sort.by(Sort.Direction.ASC, "name")));
         model.addAttribute("ingredients", ingredientRepository.findAll(Sort.by(Sort.Direction.ASC, "name")));
         model.addAttribute("recipeIngredients", recipeIngredientRepository.findByRecipeId(recipeId));
+        model.addAttribute(new SearchDTO());
         model.addAttribute(new RecipeIngredient());
         model.addAttribute(new Ingredient());
+
         return "admin/recipes/edit";
     }
 
     @PostMapping("edit/save-recipe")
-    public String saveRecipe(@ModelAttribute Recipe recipe, @RequestParam int recipeId, Model model, Errors errors, RedirectAttributes ra) {
+    public String saveRecipe(@ModelAttribute Recipe recipe, @ModelAttribute User user, @RequestParam int userId ,@RequestParam int recipeId, Model model, Errors errors, RedirectAttributes ra) {
         // error checking
         if (errors.hasErrors()) {
             return "redirect:" + recipeId + "#message";
