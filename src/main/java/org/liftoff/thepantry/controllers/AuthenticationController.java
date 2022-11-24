@@ -33,7 +33,7 @@ public class AuthenticationController {
             return null;
         }
 
-        Optional<User> user = userRepository.findById(String.valueOf(userId));
+        Optional<User> user = userRepository.findById(Integer.valueOf(String.valueOf(userId)));
 
         if (user.isEmpty()) {
             return null;
