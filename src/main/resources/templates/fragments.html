@@ -47,30 +47,79 @@
                 </li>
             </ul>
         </div>
-        <div class="dropdown px-3">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownAccountButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Account
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownAccountButton">
-                <li><a class="dropdown-item" th:href="@{/register}">Sign-Up</a></li>
-                <li><a class="dropdown-item" th:href="@{/login}">Login</a></li>
-                <li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
-<!--                <li><a class="dropdown-item" >Login</a></li>-->
-<!--                <li><a class="dropdown-item" th:href="@{/admin/units/}">Units</a></li>-->
-            </ul>
+            <div class="btn-group">
+            <div class="dropdown" role="group">
+                    <button class="btn btn-light text-dark"
+                            type="button"
+                            id="dropdownMenuButton"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                        <i class="bi bi-person-fill-exclamation"></i>
+                    </button>
+                    <div class="btn-group" role="group">
+                            <form class="px-4 py-3">
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    <input type="email" id="form2Example1" class="form-control">
+                                    <label class="form-label" for="form2Example1">Email address</label>
+                                </div>
+
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    <input type="password" id="form2Example2" class="form-control">
+                                    <label class="form-label" for="form2Example2">Password</label>
+                                </div>
+
+                                <!-- 2 column grid layout for inline styling -->
+                                <div class="row mb-4">
+                                    <div class="col d-flex justify-content-center">
+                                        <!-- Checkbox -->
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="form2Example3" checked>
+                                            <label class="form-check-label" for="form2Example3"> Remember me </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col">
+                                        <!-- Simple link -->
+                                        <a href="#!">Forgot password?</a>
+                                    </div>
+                                </div>
+
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                            </form>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">New around here? Sign up</a>
+                            <a class="dropdown-item" href="#">Forgot password?</a>
+                </div>
+
+                <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" >
+                    <li><a class="dropdown-item" th:href="@{/login}"><!--<i class="bi bi-door-open pe-2"></i>-->Login</a></li>
+                    <li><a class="dropdown-item" th:href="@{/register}"><!--<i class="bi bi-person-plus-fill pe-2"></i>-->Sign-Up</a></li>
+                </ul>
+                </div>
+
+            <div th:if="${variable != null}" class="dropdown px-3">
+                <button class="btn btn-secondary dropdown-toggle hidden-arrow" type="button" id="dropdownAccountButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-badge-fill"></i>My Pantry
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownAccountButton">
+                    <li><a class="dropdown-item" th:href="@{/admin/recipes/}">My Recipes</a></li>
+                    <li><a class="dropdown-item" th:href="@{/admin/ingredients/}">Ingredients</a></li>
+                    <li><a class="dropdown-item" th:href="@{/admin/units/}">Units</a></li>
+                    <li><div class="dropdown-divider"></div></li>
+                    <li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
+
+                </ul>
+            </div>
         </div>
-        <div class="dropdown px-3" >
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Admin Menu
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" th:href="@{/admin/recipes/}">Recipes</a></li>
-                <li><a class="dropdown-item" th:href="@{/admin/ingredients/}">Ingredients</a></li>
-                <li><a class="dropdown-item" th:href="@{/admin/units/}">Units</a></li>
-            </ul>
         </div>
-    </div>
-</nav>
+    </nav>
 
 </header>
 <banner th:fragment="banner" class="p-5 text-center bg-image d-flex justify-content-center align-items-center shadow border-bottom" th:style="'background-image:url(/images/banner-' + ${banner}+ '.jpg); height: 350px;'" >
