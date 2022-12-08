@@ -5,3 +5,9 @@
 .card-animation:hover {
     transform: scale(1.05);
 }
+
+.bg-info {
+      margin-right:-15px;
+      margin-bottom: -15px;
+
+}

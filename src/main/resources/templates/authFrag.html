@@ -48,53 +48,58 @@
                 </ul>
             </div>
             <div class="dropdown px-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownAccountButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <button th:if="${userSessionKey != null}" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownAccountButton" data-bs-toggle="dropdown" aria-expanded="false">
                     My Pantry
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownAccountButton">
                     <li><a class="dropdown-item" th:href="@{/admin/recipes/}">My Recipes</a></li>
                     <li><a class="dropdown-item" th:href="@{/admin/ingredients/}">Ingredients</a></li>
                     <li><a class="dropdown-item" th:href="@{/admin/units/}">Units</a></li>
+                    <li><div class="dropdown-divider"></div></li>
                     <li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
 
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            Dropdown form
-        </button>
-        <div class="dropdown-menu" style="width: 320px">
-            <form class="px-4 py-3">
-                <!-- Email input -->
-                <div class="form-outline mb-4">
-                    <input type="email" id="form2Example1" class="form-control" />
-                    <label class="form-label" for="form2Example1">Email address</label>
-                </div>
-
-                <!-- Password input -->
-                <div class="form-outline mb-4">
-                    <input type="password" id="form2Example2" class="form-control" />
-                    <label class="form-label" for="form2Example2">Password</label>
-                </div>
-
-                <!-- 2 column grid layout for inline styling -->
-                <div class="row mb-4">
-                    <div class="col d-flex justify-content-center">
-                        <!-- Checkbox -->
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="form2Example3" checked/>
-                            <label class="form-check-label" for="form2Example3"> Remember me </label>
+</header>
+<banner th:fragment="banner" class="p-5 text-center bg-image d-flex justify-content-center align-items-center shadow border-bottom" th:style="'background-image:url(/images/banner-' + ${banner}+ '.jpg); height: 350px;'" >
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+        <div class="d-flex justify-content-center align-items-center h-100 px-5 pt-3 pb-4">
+            <div class="text-white">
+                <h1 class="mb-3"><a class="text-white text-reset text-uppercase text-decoration-none" th:href="@{/}">The Pantry</a></h1>
+                <h4 class="mb-3">Find recipe inspiration based on the food in your pantry.</h4>
+                <form method="post" th:action="@{/recipeList/results}">
+                    <div class="w-50 mx-auto">
+                        <div class="input-group">
+                            <input class="form-control" name="searchTerm" placeholder="Let's raid the Pantry!" />
+                            <input class="btn btn-outline-light" type="submit" value="Search" />
                         </div>
                     </div>
-
+                </form>
+                <div class="pt-2">
+                    <a th:href="@{/search}" class="text-muted text-reset text-decoration-none"><i class="bi bi-search"></i> Advanced Search</a>
+                    <a th:href="@{/recipe/random}" style="padding: 5px;" class="text-muted text-reset text-decoration-none"><i class="bi bi-patch-question-fill"></i> Random Recipe ?!?! <i class="bi bi-patch-question-fill"></i></a>
                 </div>
-
-                <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-            </form>
-            <div class="dropdown-divider"></div>
-            <p>Don't have an account? <a href="/register">Register for one.</a></p>
+            </div>
         </div>
     </div>
+</banner>
+
+<footer th:fragment="footer" class="border-top bg-dark mt-3">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center py-4">
+        <p class="col-md-6 mb-0 text-muted">
+            © Copyright <span th:text="${#dates.year(#dates.createNow())}"></span> <a class="text-muted text-decoration-none fw-bolder" th:href="@{/}">The Pantry</a> - All Rights Reserved
+        </p>
+        <ul class="nav col-md-6 justify-content-end">
+            <li class="nav-item"><a class="nav-link px-2 text-muted" th:href="@{/}">Home</a>
+            <li class="nav-item"><a class="nav-link px-2 text-muted" th:href="@{/recipeList}">Recipes</a></li>
+            <li class="nav-item"><a class="nav-link px-2 text-muted" th:href="@{/search}">Search</a></li>
+            <li class="nav-item"><a class="nav-link px-2 text-muted" th:href="@{/about}">About</a></li>
+            <li class="nav-item"><a class="nav-link px-2 text-muted" th:href="@{/features}">Features</a></li>
+        </ul>
+    </div>
+</footer>
+
+</body>
+</html>
