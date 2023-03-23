@@ -80,7 +80,6 @@ do
     esac
 done
 
-
 APP_HOME=$( cd "${APP_HOME:-./}" && pwd -P ) || exit
 
 APP_NAME="Gradle"
