@@ -12,11 +12,12 @@
         <h1>Recipes</h1>
 
         <div class="container py-3">
+            <h4 class="text-black-50" id="add-new-recipe-text">Add New Recipe</h4>
             <form method="post" action="add-recipe">
                 <div class="w-50">
                     <div class="input-group">
                         <span class="input-group-text" id="">Name</span>
-                        <input class="form-control" placeholder="enter name" th:field="${recipe.name}" />
+                        <input class="form-control" placeholder="Enter Name of New Recipe to Begin" th:field="${recipe.name}" />
                         <input class="btn btn-primary" type="submit" value="Next" />
                     </div>
                 </div>
