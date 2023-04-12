@@ -20,32 +20,62 @@
     <div th:replace="fragments :: banner"></div>
 </header>
 
-<div class="container body-content py-3">
-    <h1>Advanced Search</h1>
-    <p>Add multiple ingredients to search recipes.</p>
+<div class="container body-content py-2">
+    <div class=" border-2 border-black bg-dark text-light w-100 p-3">
 
-    <div class="container">
+
+        <div class="mx-auto rounded-5 border border-2 border-secondary border-2 bg-dark bg-gradient text-light-emphasis w-50 p-3">
+        <h1 style="text-align: center;">Advanced Search</h1>
+    </div>
+        <p class="mx-5 pt-4" style="text-align: center;">Are there tons of ingredients sitting in your pantry that you need to put to use? Refine your search even more! Enter as many of your ingredients as you'd like use, as well as any you want to exclude.</p>
+    </div>
+    <div class="container border border-2 border-black">
         <form method="post" action="/list">
-            <div class="w-50 mb-3">
-                <div class="input-group">
-                    <select class="form-control basicAutoSelect" id="ingredient_select" name="ingredient_select"
-                            placeholder="Enter ingredient to search"
+            <div class="row py-2">
+                <div class="col-12 col-md-6">
+                    <h6 class="ms-5"><strong><span class="fw-bolder text-primary">Include</span></strong> all recipes in the search results containing: </h6>
+                    <div class="input-group">
+                        <select class="form-control basicAutoSelect" id="ingredient_select" name="ingredient_select"
+                            placeholder="Enter all available Ingredients you'd like to use"
                             data-url="/search/filter/"
                             data-noresults-text="No ingredients found."
                             autocomplete="off"></select>
-                    <button class="btn btn-outline-secondary" type="button" onclick="addIngredient()">Add</button>
+                        <button class="btn btn-outline-secondary" type="button" onclick="addIngredient()">Add</button>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h6 class="mx-5"><Strong><span class="fw-bolder text-danger">Exclude</span></strong> all recipes in the search results containing:</h6>
+                    <div class="input-group">
+                        <select class="form-control basicAutoSelect" id="!ingredient_select" name="ingredient_select"
+                                placeholder="Enter ingredient restrictions(Ex. Dietary limitations, Allergies, Dislikes, Etc.)"
+                                data-url="/search/filter/"
+                                data-noresults-text="No ingredients found."
+                                autocomplete="off"></select>
+                        <button class="btn btn-outline-secondary" type="button" onclick="addIngredient()">Add</button>
+                    </div>
                 </div>
             </div>
-            <div class="w-50 mb-3">
-                <h5 class="text-muted">Ingredients</h5>
-                <div class="input-group mb-3">
-                    <textarea class="form-control" id="textAreaIngredients" rows="3" readonly></textarea>
-                </div>
-                <div class="input-group mb-3">
-                    <button class="btn btn-primary" type="submit">Search</button>
-                </div>
+            <div class="row py-2">
+                <div class="col-12 col-md-6">
+                    <h5 class="text-muted">Include</h5>
+                    <div class="input-group mb-3">
+                        <textarea class="form-control" id="textAreaIngredients" rows="3" readonly></textarea>
+                    </div>
+
             </div>
-            <input type="hidden" id="hiddeningredients" th:field="${searchDTO.ingredients}"/>
+
+            <div class="col-12 col-md-6">
+                    <h5 class="text-muted">Exclude</h5>
+                    <div class="input-group mb-3">
+                        <textarea class="form-control" id="!textAreaIngredients" rows="3" readonly></textarea>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <button class="mx-auto btn btn-primary btn-lg" type="submit" style="width: 200px;">Search</button>
+
+                </div>
+            <input type="hidden" id="!hiddeningredients" th:field="${searchDTO.ingredients}"/>
+            </div>
         </form>
     </div>
 
