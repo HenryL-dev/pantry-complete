@@ -49,7 +49,7 @@ public class AuthenticationController {
     @GetMapping("register")
     public String displayRegistrationForm(Model model) {
         model.addAttribute(new RegisterFormDTO());
-        model.addAttribute("title", "Register");
+        model.addAttribute("banner", "Register");
         return "register";
     }
 
@@ -96,7 +96,7 @@ public class AuthenticationController {
     @GetMapping("/login")
     public String displayLoginForm(Model model) {
         model.addAttribute(new LoginFormDTO());
-        model.addAttribute("title", "Log In");
+        model.addAttribute("banner", "Log In");
         return "login";
     }
 

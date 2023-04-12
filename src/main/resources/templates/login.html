@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+<body>
 
 <header>
     <div th:replace="fragments :: nav"></div>
 
 </header>
-
+<div class="container">
 <form method="post">
     <div class="form-group">
         <label th:for="username">Username
@@ -26,7 +26,7 @@
 </form>
 
 <p>Don't have an account? <a href="/register">Register for one.</a></p>
-
+</div>
 <footer th:replace="fragments :: footer"></footer>
 
 </body>
