@@ -21,19 +21,19 @@
 </header>
 
 <div class="container body-content py-2">
-    <div class=" border-2 border-black bg-dark text-light w-100 p-3">
+    <div class=" border-4 border-dark bg-dark text-white w-100 p-3" style="text-align: center;">
 
 
-        <div class="mx-auto rounded-5 border border-2 border-secondary border-2 bg-dark bg-gradient text-light-emphasis w-50 p-3">
+        <div class="mx-auto rounded-5 border border-2 border-secondary border-2 bg-dark bg-gradient text-white-emphasis w-50 p-3">
         <h1 style="text-align: center;">Advanced Search</h1>
     </div>
-        <p class="mx-5 pt-4" style="text-align: center;">Are there tons of ingredients sitting in your pantry that you need to put to use? Refine your search even more! Enter as many of your ingredients as you'd like use, as well as any you want to exclude.</p>
+        <p class="text-break mx-5 pt-4">Are there several ingredients sitting in your pantry that you need to put to use? You can refine your search even more by entering as many of your ingredients as you'd like use, as well as any you want to exclude.</p>
     </div>
-    <div class="container border border-2 border-black">
+    <div class="container border border-4 border-dark">
         <form method="post" action="/list">
             <div class="row py-2">
                 <div class="col-12 col-md-6">
-                    <h6 class="ms-5"><strong><span class="fw-bolder text-primary">Include</span></strong> all recipes in the search results containing: </h6>
+                    <h6 class="ms-5">Add each of the ingredients youd like to <strong><span class="fw-bolder text-primary">Include</span></strong> in your search: </h6>
                     <div class="input-group">
                         <select class="form-control basicAutoSelect" id="ingredient_select" name="ingredient_select"
                             placeholder="Enter all available Ingredients you'd like to use"
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <h6 class="mx-5"><Strong><span class="fw-bolder text-danger">Exclude</span></strong> all recipes in the search results containing:</h6>
+                    <h6 class="mx-5">Add each of the ingredients youd like to<Strong><span class="fw-bolder text-danger">Exclude</span></strong> in your search: </h6>
                     <div class="input-group">
                         <select class="form-control basicAutoSelect" id="!ingredient_select" name="ingredient_select"
                                 placeholder="Enter ingredient restrictions(Ex. Dietary limitations, Allergies, Dislikes, Etc.)">

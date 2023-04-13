@@ -54,10 +54,11 @@
             </ul>
         </div>
 
-        <div class="dropdown px-3">
+        <div class="dropdown ">
+
             <!--dropdown-toggle-->
-            <button th:if="${session.isEmpty()}" class="btn btn-sm btn-link text-light dropdown" style="border: none;" type="button" id="dropdownAccountButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-square fa-3x"> <!--style="font-size: 3rem;"--></i>
+            <a th:if="${session.isEmpty()}" class="d-flex align-items-center btn btn-link text-light text-decoration-none dropdown" type="button" style="border: none; margin-top: -1.0rem; margin-bottom: -1.0rem" id="dropdownAccountButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person" style="font-size: 3.20rem;"></i>
                     <!--<h6>--><!--<span class="position-absolute translate-middle badge rounded-pill bg-info">
                         Please Log-in
                         <span class="visually-hidden"> Click to Sign-In</span>
@@ -68,16 +69,20 @@
                         <!--<span class="badge bg-warning text-dark">-->
 
 
-            </button>
+            </a>
+<!--            <div class="d-flex justify-content-center align-items-center fw-medium text-light" style="text-align: center;">-->
+<!--            <p class="d-flex align-items-center justify-content-center fw-medium badge bg-secondary text-light" style="text-align: center; font-size: .58rem; margin-left: 0; margin-right: 0; margin-top: -0.75rem; margin-bottom: -1.30rem; width: 3rem; height: .65rem;">Sign In</p>-->
+<!--            </div>-->
             <ul class="dropdown-menu" aria-labelledby="dropdownAccountButton">
                 <li><a class="dropdown-item" th:href="@{/register}">Sign-Up</a></li>
                 <li><a class="dropdown-item" th:href="@{/login}">Login</a></li>
             </ul>
         </div>
-        <div class="dropdown px-3">
-            <button th:if="${!session.isEmpty()}" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownAccountButton2" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="dropdown">
+            <a th:if="${!session.isEmpty()}" class="d-flex align-items-center btn btn-link text-light text-decoration-none dropdown" type="button" style="border: none; margin-top: -2rem; margin-bottom: -1.20rem" id="dropdownAccountButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-house-door"></i>
                 My Pantry
-            </button>
+            </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownAccountButton">
                 <li><a class="dropdown-item" th:href="@{/admin/recipes/}">My Recipes</a></li>
                 <li><a class="dropdown-item" th:href="@{/admin/mealPlanner/}">My Meal Planner</a></li>
@@ -109,7 +114,7 @@
                 </form>
                 <div class="pt-2">
                     <a th:href="@{/search}" class="mt-3 btn btn-secondary text-muted text-reset text-decoration-none" ><i class="bi bi-search"></i> Advanced Search</a>
-                    <a th:href="@{/recipe/random}" class="ms-1 mt-3 btn btn-secondary text-muted text-reset text-decoration-none"><i class="bi bi-patch-question-fill"></i> Random Recipe</a>
+                    <a th:href="@{/recipe/random}" class="ms-1 mt-3 btn btn-secondary text-muted text-reset text-decoration-none"><i class="bi bi-dice-5"></i> Random Recipe</a>
                 </div>
             </div>
         </div>
