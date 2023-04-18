@@ -54,10 +54,11 @@
             </ul>
         </div>
 
-        <div class="dropdown px-3">
+        <div class="dropdown ">
+
             <!--dropdown-toggle-->
-            <button th:if="${session.isEmpty()}" class="btn btn-sm btn-link text-light dropdown" style="border: none;" type="button" id="dropdownAccountButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-square fa-3x"> <!--style="font-size: 3rem;"--></i>
+            <a th:if="${session.isEmpty()}" class="d-flex align-items-center btn btn-link text-light text-decoration-none dropdown" type="button" style="border: none; margin-top: -2rem; margin-bottom: -1.20rem" id="dropdownAccountButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person" style="font-size: 3.20rem;"></i>
                     <!--<h6>--><!--<span class="position-absolute translate-middle badge rounded-pill bg-info">
                         Please Log-in
                         <span class="visually-hidden"> Click to Sign-In</span>
@@ -68,13 +69,16 @@
                         <!--<span class="badge bg-warning text-dark">-->
 
 
-            </button>
+            </a>
+            <div class="d-flex justify-content-center align-items-center fw-medium bg-secondary text-dark" style="text-align: center;">
+            <p class="d-flex align-items-center justify-content-center fw-medium badge bg-secondary text-dark" style="text-align: center; font-size: .57rem; margin-left: 0; margin-right: 0; margin-top: -0.75rem; margin-bottom: -1.30rem; width: 3rem; height: .65rem;">Sign In</p>
+            </div>
             <ul class="dropdown-menu" aria-labelledby="dropdownAccountButton">
                 <li><a class="dropdown-item" th:href="@{/register}">Sign-Up</a></li>
                 <li><a class="dropdown-item" th:href="@{/login}">Login</a></li>
             </ul>
         </div>
-        <div class="dropdown px-3">
+        <div class="dropdown">
             <button th:if="${!session.isEmpty()}" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownAccountButton2" data-bs-toggle="dropdown" aria-expanded="false">
                 My Pantry
             </button>
